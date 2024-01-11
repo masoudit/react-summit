@@ -8,6 +8,12 @@ const inDev = (env) => {
   return env?.development;
 };
 
+const isReport = (env) => {
+  if (env && env["production-report"]) {
+    return true;
+  }
+};
+
 /**
  * Create webpack aliases
  */
@@ -21,6 +27,7 @@ function createWebpackAliases(aliases) {
 
 // Export helpers
 module.exports = {
+  isReport,
   inDev,
   createWebpackAliases,
 };

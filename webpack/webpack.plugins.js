@@ -1,13 +1,18 @@
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { isReport } = require("./webpack.helper");
+
 // const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 // const WorkboxPlugin = require("workbox-webpack-plugin");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-const configs = () =>
+const configs = (env) =>
   [
     new ForkTsCheckerWebpackPlugin(), // speed up ts type check
     // inDev() && new ReactRefreshWebpackPlugin(),
+    isReport(env) && new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       template: "public/index.html",
       // favicon: "assets/images/logo.png",
@@ -17,7 +22,6 @@ const configs = () =>
       filename: "[name].[chunkhash].css",
       chunkFilename: "[name].[chunkhash].chunk.css",
     }),
-    //   !inDevMode() &&
     //     new WorkboxPlugin.GenerateSW({
     //       // these options encourage the ServiceWorkers to get in there fast
     //       // and not allow any straggling "old" SWs to hang around

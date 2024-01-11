@@ -5,8 +5,9 @@
   "author": "masoudit",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --env development serve --config webpack/webpack.config.dev.js",
-    "build": "webpack --config webpack/webpack.config.prod.js",
+    "start": "webpack-dev-server --mode development --env development serve --config webpack/webpack.config.dev.js",
+    "build": "webpack --mode production --config webpack/webpack.config.prod.js",
+    "analyzer": "webpack --mode production --env production-report --config webpack/webpack.config.prod.js ",
     "serve": "webpack --config webpack/webpack.config.prod.js && serve -p 3050 -s dist/",
     "serve-simple": "serve -p 3051 -s dist/",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src/",
@@ -49,6 +50,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0",
+    "webpack-bundle-analyzer": "^4.10.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   }
