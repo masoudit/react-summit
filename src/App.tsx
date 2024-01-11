@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
 import "./App.less";
+import { t } from "i18next";
 
 export default function App() {
-  console.log("a-----");
   return (
     <main>
-      <h1>APP</h1>
+      <h1>{t("appName")}</h1>
       <button className='btn'>Hello daisyUI</button>
     </main>
   );
