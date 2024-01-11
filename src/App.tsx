@@ -1,7 +1,8 @@
+import React from "react";
 export default function App() {
-    return (
-      <main>
-        <h1>APP</h1>
-      </main>
-    );
-  }
+  return (
+    <main>
+      <h1>APP</h1>
+    </main>
+  );
+}
