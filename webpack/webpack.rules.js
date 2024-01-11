@@ -1,6 +1,7 @@
 const { inDev } = require("./webpack.helper");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-module.exports = [
+
+const configs = (env) => [
   {
     // Typescript loader
     test: /\.tsx?$/,
@@ -16,7 +17,7 @@ module.exports = [
     // CSS Loader
     test: /\.css$/,
     use: [
-      { loader: inDev() ? "style-loader" : MiniCssExtractPlugin.loader },
+      { loader: inDev(env) ? "style-loader" : MiniCssExtractPlugin.loader },
       { loader: "css-loader" },
       { loader: "postcss-loader" },
     ],
@@ -25,7 +26,7 @@ module.exports = [
     // Less loader
     test: /\.less$/,
     use: [
-      { loader: inDev() ? "style-loader" : MiniCssExtractPlugin.loader },
+      { loader: inDev(env) ? "style-loader" : MiniCssExtractPlugin.loader },
       { loader: "css-loader" },
       { loader: "less-loader" },
       { loader: "postcss-loader" },
@@ -41,3 +42,5 @@ module.exports = [
     },
   },
 ];
+
+module.exports = configs;

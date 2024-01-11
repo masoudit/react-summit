@@ -4,8 +4,8 @@ const cwd = process.cwd();
 /**
  * Are we in development mode?
  */
-const inDev = () => {
-  return process.env.NODE_ENV == "development";
+const inDev = (env) => {
+  return env?.development;
 };
 
 /**
