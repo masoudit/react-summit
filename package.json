@@ -11,7 +11,6 @@
     "serve": "webpack --config webpack/webpack.config.prod.js && serve -p 3050 -s dist/",
     "serve-simple": "serve -p 3051 -s dist/",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src/",
-    "test:unit": "jest",
     "test:e2e": "cypress open"
   },
   "dependencies": {

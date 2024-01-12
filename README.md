@@ -1,5 +1,5 @@
 ### intro REACT SUMMIT PROJECT
-This web application is meticulously crafted to deliver an exceptional user experience with a focus on efficiency, maintainability, and modern design principles. The following features and technologies have been strategically incorporated to ensure a robust and high-quality application.
+This ReactJs application is meticulously crafted to deliver an exceptional user experience with a focus on efficiency, maintainability, and modern design principles. The following features and technologies have been strategically incorporated to ensure a robust and high-quality application.
 
 ### Pre requirements
 - node v18.17.0
@@ -15,6 +15,7 @@ note: If there are delays during the setup process, consider removing the Cypres
 
 ### Hot Features And Technalogy
 - Webpack 5: base config project no CRA
+- Typescript
 - TAILWIND CSS for stracuture Project
 - DaisyUi for component design
 - Zustand for statementment
