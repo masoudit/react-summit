@@ -28,12 +28,12 @@ module.exports = (env) => {
       open: true,
       historyApiFallback: true,
       proxy: {
-        "/api": {
+        "/apix": {
           changeOrigin: true,
           target: {
             host: "localhost",
             protocol: "http:",
-            port: 1337,
+            port: 9001,
           },
           pathRewrite: {
             "^/api": "",
