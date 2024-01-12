@@ -16,7 +16,7 @@
             "noEmit": true,
             "baseUrl": ".",
             "paths": {
-            "@assets/*": ["./assets/*"],
+            "@assets/*": ["./src/assets/*"],
             "@src/*": ["./src/*"]
         }
     },

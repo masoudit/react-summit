@@ -1,114 +1,137 @@
+import { useAuthStore } from "@src/app/local/authStore";
+import HeaderAuth from "@src/components/auth/HeaderAuth";
+import ToastContainerCustom from "@src/components/utils/toastify";
+import Button from "@src/kits/Button";
+import InputCheckbox from "@src/kits/InputCheckox";
+import InputEmail from "@src/kits/InputEmail";
+import InputPasswordConfirm from "@src/kits/InputPasswordConfirm";
+import InputText from "@src/kits/InputText";
+import { t } from "i18next";
+import _ from "lodash";
 import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+type Inputs = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 const Register = () => {
+  const registerFunction = useAuthStore((state) => state.register);
+  const nav = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const d = await registerFunction(
+      _.trim(data.email),
+      _.trim(data.password),
+      _.trim(data.confirmPassword),
+    );
+    if (d?.response && d?.response.success) {
+      // redirect to login
+      toast.success(t("Thank you for registering, Please confirm email!"), {
+        toastId: 1,
+        updateId: 1,
+      });
+      setTimeout(() => {
+        nav("/login");
+      }, 3000);
+    } else {
+      toast.error(t(d?.response.errorMessage || "Please Try Again!"), {
+        toastId: 1,
+        updateId: 1,
+      });
+    }
+  };
+
   return (
-    <section className='bg-gray-50 dark:bg-gray-900'>
+    <section className='bg-gray-50'>
       <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
-        <a
-          href='#'
-          className='flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white'
-        >
-          <img
-            className='w-8 h-8 mr-2'
-            src='https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg'
-            alt='logo'
-          />
-          Flowbite
-        </a>
+        <HeaderAuth />
         <div className='w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
           <div className='p-6 space-y-4 md:space-y-6 sm:p-8'>
             <h1 className='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white'>
               Create and account
             </h1>
-            <form className='space-y-4 md:space-y-6' action='#'>
+            <form
+              className='space-y-4 md:space-y-6'
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div>
-                <label
-                  htmlFor='email'
-                  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-                >
-                  Your email
-                </label>
-                <input
-                  type='email'
+                <InputEmail
+                  title='Email'
                   name='email'
-                  id='email'
-                  className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                  placeholder='name@company.com'
+                  register={register}
+                  options={{ errors }}
+                  required
+                  showRequired
                 />
               </div>
               <div>
-                <label
-                  htmlFor='password'
-                  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-                >
-                  Password
-                </label>
-                <input
-                  type='password'
+                <InputText
+                  title='Password'
                   name='password'
-                  id='password'
-                  placeholder='••••••••'
-                  className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                  type='password'
+                  register={register}
+                  options={{ errors }}
+                  showRequired
+                  required
                 />
               </div>
               <div>
-                <label
-                  htmlFor='confirm-password'
-                  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-                >
-                  Confirm password
-                </label>
-                <input
-                  type='confirm-password'
-                  name='confirm-password'
-                  id='confirm-password'
-                  placeholder='••••••••'
-                  className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                <InputPasswordConfirm
+                  title='Confirm password'
+                  name='confirmPassword'
+                  type='password'
+                  register={register}
+                  options={{ errors }}
+                  required
+                  showRequired
+                  watch={watch}
                 />
               </div>
               <div className='flex items-start'>
-                <div className='flex items-center h-5'>
-                  <input
-                    id='terms'
-                    aria-describedby='terms'
-                    type='checkbox'
-                    className='w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800'
-                  />
-                </div>
-                <div className='ml-3 text-sm'>
-                  <label
-                    htmlFor='terms'
-                    className='font-light text-gray-500 dark:text-gray-300'
-                  >
+                <InputCheckbox
+                  title={"terms"}
+                  name='terms'
+                  register={register}
+                  options={{ errors }}
+                  required
+                >
+                  <div className='label-text text-white'>
                     I accept the{" "}
                     <a
-                      className='font-medium text-primary-600 hover:underline dark:text-primary-500'
+                      className='font-medium text-primary-600 hover:underline hover:text-white'
                       href='#'
                     >
                       Terms and Conditions
                     </a>
-                  </label>
-                </div>
+                  </div>
+                </InputCheckbox>
               </div>
-              <button
-                type='submit'
-                className='w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'
-              >
-                Create an account
-              </button>
+              <Button title={"Create an account"} />
               <p className='text-sm font-light text-gray-500 dark:text-gray-400'>
                 Already have an account?{" "}
-                <a
-                  href='#'
+                <Link
+                  to='/login'
                   className='font-medium text-primary-600 hover:underline dark:text-primary-500'
                 >
                   Login here
-                </a>
+                </Link>
               </p>
             </form>
           </div>
         </div>
       </div>
+      <ToastContainerCustom />
     </section>
   );
 };

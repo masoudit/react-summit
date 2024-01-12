@@ -1,23 +1,36 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 import apiFetch from "../utils/apiFetch";
 import { AUTH_LOGIN, AUTH_REGISTER } from "./statics";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+interface IResponse {
+  response: any;
+}
 
+interface IUser {
+  success: any;
+  data: any;
+}
 interface IUserState {
-  user: object;
+  user?: any;
   isLoading?: boolean;
-  login: (username: string, password: string) => Promise<void>;
-  register: (username: string, password: string) => Promise<void>;
+  login: (username: string, password: string) => Promise<IResponse>;
+  register: (
+    username: string,
+    password: string,
+    confirmPassword: string,
+  ) => Promise<IResponse>;
 }
 
 export const useAuthStore = create<IUserState>()(
   persist(
     (set) => ({
-      user: {},
+      user: { data: undefined },
       login: async (username, password) => {
         try {
           set(() => ({ isLoading: true }));
-          const fetchData = await apiFetch.post<object, object>(AUTH_LOGIN, {
+          const fetchData = await apiFetch.post<object, IUser>(AUTH_LOGIN, {
             username,
             password,
           });
@@ -26,6 +39,10 @@ export const useAuthStore = create<IUserState>()(
             isLoading: false,
             user: fetchData,
           }));
+          if (fetchData?.success) {
+            localStorage.setItem("token", fetchData.data.token);
+          }
+          return { response: fetchData };
         } catch (err) {
           set(() => ({ isLoading: false }));
         }
@@ -40,11 +57,15 @@ export const useAuthStore = create<IUserState>()(
 
           set(() => ({
             isLoading: false,
-            user: fetchData,
           }));
+          return { response: fetchData };
         } catch (err) {
           set(() => ({ isLoading: false }));
         }
+      },
+      clear: () => {
+        set(() => null);
+        sessionStorage.clear(); // or localStorage.clear();
       },
     }),
     {

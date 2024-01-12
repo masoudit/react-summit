@@ -1,23 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "./App.less";
 import { useAuthStore } from "./app/local/authStore";
 import { useBearStore } from "./app/local/sampleStore";
 import { Route, Routes as ReactRoutes } from "react-router-dom";
 import { routes } from "./app/routes/routes";
+import "react-toastify/dist/ReactToastify.css";
 
 const App: React.FC = () => {
-  const login = useAuthStore((state) => state.login);
-  const bears = useBearStore((state) => state.bears);
-  const increase = useBearStore((state) => state.increase);
+  const user = useAuthStore((state) => state.user);
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+  const [isPublic, setIsPublic] = useState<boolean>(true);
+  // const bears = useBearStore((state) => state.bears);
+  // const increase = useBearStore((state) => state.increase);
 
-  const onSubmit = async () => {
-    // const response = await fetch("/api/login");
-    login("test", "test1");
-  };
-
-  const isAuthorized = true;
-  const isPublic = false;
+  useEffect(() => {
+    if (user?.data) {
+      setIsAuthorized(true);
+    }
+  }, [user]);
 
   return (
     <div>

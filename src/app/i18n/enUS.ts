@@ -1,4 +1,4 @@
 export default {
-  appName: "Article Management APP",
+  appName: "React Summit",
   searchContactPlaceholder: "Search your contacts ....",
 };

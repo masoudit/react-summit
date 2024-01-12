@@ -7,17 +7,28 @@ import {
 import { HttpResponse, http } from "msw";
 
 export const handlers = [
-  http.post(AUTH_LOGIN, () => {
-    return HttpResponse.json({
-      data: {
-        user: {
-          id: "123",
-          name: "John Maverick",
+  http.post(AUTH_LOGIN, async ({ request }) => {
+    const ud = await request.json();
+    const x = JSON.parse(JSON.stringify(ud));
+    // only this user valid
+    if (x?.username === "demo@masoudit.com" && x?.password === "demMo@123") {
+      return HttpResponse.json({
+        data: {
+          user: {
+            id: "123",
+            name: "MasoudIt",
+          },
+          token: "BAnRW303S/wiS6NwMsklJClU9J3+42zo",
         },
-        token: "BAnRW303S/wiS6NwMsklJClU9J3+42zo",
-      },
-      success: true,
-    });
+        success: true,
+      });
+    } else {
+      return HttpResponse.json({
+        data: null,
+        errorMessage: "Email or Password Is Invalid!",
+        success: false,
+      });
+    }
   }),
   http.post(AUTH_REGISTER, () => {
     return HttpResponse.json({
