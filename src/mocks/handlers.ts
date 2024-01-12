@@ -5,6 +5,7 @@ import {
   GET_ARTICLES,
 } from "@src/app/local/statics";
 import { HttpResponse, http } from "msw";
+import articlesMockData from "./articles-mock.json";
 
 export const handlers = [
   http.post(AUTH_LOGIN, async ({ request }) => {
@@ -57,7 +58,12 @@ export const handlers = [
     });
   }),
   http.get(GET_ARTICLES, () => {
-    console.log('Captured a "GET /posts" request');
+    return HttpResponse.json({
+      data: {
+        articles: articlesMockData,
+      },
+      success: true,
+    });
   }),
   // http.post("/api/posts", () => {
   //   console.log('Captured a "POST /posts" request');

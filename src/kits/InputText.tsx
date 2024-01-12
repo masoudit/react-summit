@@ -19,8 +19,16 @@ const passwordPattern = {
   },
 };
 const InputText = (props: IInputProps) => {
-  const { title, required, options, register, name, type, showRequired } =
-    props;
+  const {
+    title,
+    required,
+    options,
+    register,
+    name,
+    type,
+    showRequired,
+    light,
+  } = props;
   const errors = options?.errors;
   let rg;
   if (type === "password") {
@@ -35,7 +43,7 @@ const InputText = (props: IInputProps) => {
     <div>
       <div className='form-control w-full max-w-md'>
         <label className='label' htmlFor='email'>
-          <h4 className='label-text text-white'>
+          <h4 className={`label-text ${!light ? "text-white" : ""}`}>
             {t(title)}
             {showRequired ? <b className=''>*</b> : null}
           </h4>
@@ -55,9 +63,16 @@ const InputText = (props: IInputProps) => {
             type={showCode ? "text" : type || "text"}
             name={name}
             placeholder={`${title}`}
-            className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-              hasError ? "input-error" : ""
-            }`}
+            className={`bg-gray-50 border border-gray-300 
+            text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 
+            focus:border-primary-600 block w-full p-2.5 
+            ${
+              !light
+                ? `dark:bg-gray-700 
+            dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
+            dark:focus:ring-blue-500 dark:focus:border-blue-500`
+                : ""
+            } ${hasError ? "input-error" : ""}`}
           />
           {type === "password" ? (
             <button

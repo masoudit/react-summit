@@ -21,6 +21,7 @@ interface IUserState {
     password: string,
     confirmPassword: string,
   ) => Promise<IResponse>;
+  logout: () => any;
 }
 
 export const useAuthStore = create<IUserState>()(
@@ -63,8 +64,8 @@ export const useAuthStore = create<IUserState>()(
           set(() => ({ isLoading: false }));
         }
       },
-      clear: () => {
-        set(() => null);
+      logout: () => {
+        set(() => ({ user: undefined }));
         sessionStorage.clear(); // or localStorage.clear();
       },
     }),

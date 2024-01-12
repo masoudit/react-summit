@@ -2,10 +2,9 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 type Props = {
-  isPublic: boolean;
   isAuthorized: boolean;
 };
-const PrivateLayout = ({ isPublic, isAuthorized }: Props) => {
+const PrivateLayout = ({ isAuthorized }: Props) => {
   return isAuthorized ? <Outlet /> : <Navigate to='/login' />;
 };
 

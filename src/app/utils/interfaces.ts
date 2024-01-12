@@ -10,4 +10,14 @@ export interface IInputProps {
   showRequired?: boolean;
   watch?: any;
   children?: any;
+  light?: boolean;
+  control?: any;
+}
+
+type option = {
+  label: string;
+  value: string;
+};
+export interface ISelectProps extends IInputProps {
+  items: option[];
 }

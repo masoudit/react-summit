@@ -6,7 +6,17 @@ import PublicLayout from "../layout/PublicLayout";
 import Login from "@src/pages/login/Login";
 import Register from "@src/pages/register/Register";
 import Articles from "@src/pages/articles/Articles";
+import Article from "@src/pages/articles/Article";
 
+interface IRoute {
+  name: string;
+  title: string;
+  component: any;
+  path: string;
+  isPublic?: boolean;
+  hasSiderLink?: boolean;
+  routes?: IRoute[];
+}
 export const routes = [
   {
     layout: PublicLayout,
@@ -17,6 +27,7 @@ export const routes = [
         component: Login,
         path: "/",
         isPublic: true,
+        hasSiderLink: false,
       },
       {
         name: "login",
@@ -42,6 +53,7 @@ export const routes = [
         title: "Dashbaord page",
         component: Articles,
         path: "/dashboard",
+        hasSiderLink: false,
       },
       {
         name: "articles",
@@ -49,22 +61,20 @@ export const routes = [
         hasSiderLink: true,
         component: Articles,
         path: "/articles",
-        routes: [
-          {
-            name: "articles",
-            title: "Articles",
-            hasSiderLink: true,
-            component: Articles,
-            path: "/articles",
-          },
-          {
-            name: "add",
-            title: "Add Article",
-            hasSiderLink: true,
-            component: Articles,
-            path: "/articles/new",
-          },
-        ],
+      },
+      {
+        name: "add",
+        title: "Add Article",
+        hasSiderLink: true,
+        component: Article,
+        path: "/articles/new",
+      },
+      {
+        name: "edit",
+        title: "Edit Article",
+        hasSiderLink: true,
+        component: Article,
+        path: "/articles/:id",
       },
     ],
   },
