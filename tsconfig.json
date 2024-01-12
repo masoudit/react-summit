@@ -9,7 +9,7 @@
             "esModuleInterop": true,
             "noImplicitAny": true,
             "allowSyntheticDefaultImports": true,
-            "sourceMap": true,
+            "sourceMap": false,
             "outDir": "dist",
             "moduleResolution": "node",
             "resolveJsonModule": true,

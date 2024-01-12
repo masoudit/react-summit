@@ -6,6 +6,7 @@ import { Route, Routes as ReactRoutes } from "react-router-dom";
 import { routes } from "./app/routes/routes";
 import "react-toastify/dist/ReactToastify.css";
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import ErrorPage from "./pages/error/ErrorPage";
 
 const App: React.FC = () => {
   const user = useAuthStore((state) => state.user);
@@ -43,7 +44,7 @@ const App: React.FC = () => {
               </Route>
             );
           })}
-          <Route path='*' element={<h2>Page Not Found</h2>} />
+          <Route path='*' element={<ErrorPage />} />
         </ReactRoutes>
       ) : (
         false

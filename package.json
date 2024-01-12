@@ -39,6 +39,7 @@
     "autoprefixer": "^10.4.16",
     "copy-webpack-plugin": "^12.0.0",
     "css-loader": "^6.9.0",
+    "cypress": "^13.6.2",
     "daisyui": "^4.6.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
