@@ -1,4 +1,5 @@
 import { IInputProps } from "@src/app/utils/interfaces";
+import Icon from "@src/components/utils/Icon";
 import { t } from "i18next";
 import React, { useState } from "react";
 
@@ -42,7 +43,7 @@ const InputText = (props: IInputProps) => {
   return (
     <div>
       <div className='form-control w-full max-w-md'>
-        <label className='label' htmlFor='email'>
+        <label className='label' htmlFor={name}>
           <h4 className={`label-text ${!light ? "text-white" : ""}`}>
             {t(title)}
             {showRequired ? <b className=''>*</b> : null}
@@ -60,6 +61,7 @@ const InputText = (props: IInputProps) => {
         >
           <input
             {...rg}
+            id={name}
             type={showCode ? "text" : type || "text"}
             name={name}
             placeholder={`${title}`}
@@ -78,9 +80,9 @@ const InputText = (props: IInputProps) => {
             <button
               onClick={() => setShowCode(!showCode)}
               type='button'
-              className='btn btn-ghost absolute right-0 bottom-0 text-xl '
+              className='btn btn-sm btn-ghost absolute hover:bg-transparent right-0 top-1'
             >
-              {/* {showCode ? <EyeOutlined /> : <EyeInvisibleOutlined />} */}
+              {showCode ? <Icon name='CloseEye' /> : <Icon name='OpenEye' />}
             </button>
           ) : (
             false

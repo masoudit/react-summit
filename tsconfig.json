@@ -1,24 +1,24 @@
 {
-    "compilerOptions": {
-            "jsx": "react-jsx",
-            "allowJs": true,
-            "target": "ES6",
-            "module": "ESNext",
-            "skipLibCheck": true,
-            "moduleDetection": "force",
-            "esModuleInterop": true,
-            "noImplicitAny": true,
-            "allowSyntheticDefaultImports": true,
-            "sourceMap": false,
-            "outDir": "dist",
-            "moduleResolution": "node",
-            "resolveJsonModule": true,
-            "noEmit": true,
-            "baseUrl": ".",
-            "paths": {
-            "@assets/*": ["./src/assets/*"],
-            "@src/*": ["./src/*"]
-        }
-    },
-    "include": ["**/*.ts", "**/*.tsx", "webpack/**/*"]
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "target": "ES6",
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleDetection": "force",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": false,
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["./src/assets/*"],
+      "@src/*": ["./src/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "webpack/**/*"]
 }

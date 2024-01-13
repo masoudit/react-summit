@@ -3,12 +3,15 @@ React Summit one the best solution and boilerplate for Frontend Application on 2
 React Summit is meticulously crafted to deliver an exceptional user experience with a focus on efficiency, maintainability, and modern design principles. 
 The following features and technologies have been strategically incorporated to ensure a robust and high-quality application.
 
+![image description](public/demo.png)
+
 ### Pre requirements
 - node v18.17.0
 
 ### Setup
 - yarn install
 - yarn start
+
 note: Due to the utilization of the MockAPI (MSW Package), testing is exclusively available in development mode. Please conduct testing using the "yarn start" command.
 note: If there are delays during the setup process, consider removing the Cypress package.
 

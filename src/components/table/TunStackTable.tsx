@@ -11,6 +11,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
+import Icon from "../utils/Icon";
 
 interface IProps {
   heads: any;
@@ -45,7 +46,7 @@ function DebouncedInput({
   return (
     <input
       {...props}
-      className='input w-full max-w-xs mb-5'
+      className='input input-sm w-full max-w-md input-bordered rounded border-gray-200'
       value={value}
       onChange={(e) => setValue(e.target.value)}
     />
@@ -102,20 +103,20 @@ function TunStackTable(props: IProps) {
 
   return (
     <div className='p-2 overflow-x-auto'>
-      <div className='flex justify-between'>
+      <div className='flex justify-between items-center mb-4'>
         <div className='flex items-center gap-2'>
           <button
-            className='btn btn-md rounded-10 btn-default'
+            className='btn btn-ghost btn-md rounded-10 btn-default'
             onClick={() => {
               nav("/articles/new");
             }}
           >
-            +
+            <Icon name='IconAdd' />
           </button>
           <h2 className='card-title'>Articles</h2>
           <p> | List of articles</p>
         </div>
-        <div>
+        <div className='basis-1/4'>
           <DebouncedInput
             value={globalFilter ?? ""}
             onChange={(value) => setGlobalFilter(String(value))}
@@ -188,28 +189,28 @@ function TunStackTable(props: IProps) {
       <div className='h-4' />
       <div className='flex items-center gap-2 text-sm'>
         <button
-          className='border rounded p-1'
+          className='btn btn-sm btn-ghost border rounded p-1'
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
         >
           {"<<"}
         </button>
         <button
-          className='border rounded p-1'
+          className='btn btn-sm btn-ghost border rounded p-1'
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
           {"<"}
         </button>
         <button
-          className='border rounded p-1'
+          className='btn btn-sm btn-ghost border rounded p-1'
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
           {">"}
         </button>
         <button
-          className='border rounded p-1'
+          className='btn btn-sm btn-ghost border rounded p-1'
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
         >

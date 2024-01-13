@@ -80,6 +80,7 @@ const Articles = () => {
           id: row.id,
           title: row.title,
           author: row.author,
+          description: row.description,
           createdAt: row.createdAt,
           updatedAt: row.updatedAt,
           actions: (

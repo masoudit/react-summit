@@ -1,4 +1,5 @@
 import { IInputProps } from "@src/app/utils/interfaces";
+import Icon from "@src/components/utils/Icon";
 import { t } from "i18next";
 import React, { useState } from "react";
 
@@ -47,7 +48,7 @@ const InputPasswordConfirm = (props: IInputProps) => {
               type='button'
               className='btn btn-ghost absolute right-0 bottom-0 text-xl '
             >
-              {/* {showCode ? <EyeOutlined /> : <EyeInvisibleOutlined />} */}
+              {showCode ? <Icon name='CloseEye' /> : <Icon name='OpenEye' />}
             </button>
           ) : (
             false
