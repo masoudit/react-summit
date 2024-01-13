@@ -1,8 +1,8 @@
+import { useArticleStore } from "@src/app/local/articleStore";
 import Header from "@src/components/main/Header";
 import Button from "@src/kits/Button";
 import InputTextArea from "@src/kits/InpuTextArea";
 import InputMultiSelect from "@src/kits/InputMultiSelect";
-import InputSelect from "@src/kits/InputSelect";
 import InputText from "@src/kits/InputText";
 import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -35,6 +35,9 @@ export const tagOptions = [
 ];
 
 const Article = () => {
+  const createArticle = useArticleStore((state) => state.create);
+  const updateArticle = useArticleStore((state) => state.update);
+
   const {
     register,
     handleSubmit,
@@ -52,7 +55,22 @@ const Article = () => {
   }, [state]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log("data-----", data);
+    if (isNew)
+      createArticle({
+        title: data.title,
+        author: data.author,
+        description: data.description,
+        tags: data.tags,
+      });
+    else {
+      updateArticle({
+        id: 1,
+        title: data.title,
+        author: data.author,
+        description: data.description,
+        tags: data.tags,
+      });
+    }
   };
 
   return (

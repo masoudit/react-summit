@@ -8,15 +8,6 @@ import Register from "@src/pages/register/Register";
 import Articles from "@src/pages/articles/Articles";
 import Article from "@src/pages/articles/Article";
 
-interface IRoute {
-  name: string;
-  title: string;
-  component: any;
-  path: string;
-  isPublic?: boolean;
-  hasSiderLink?: boolean;
-  routes?: IRoute[];
-}
 export const routes = [
   {
     layout: PublicLayout,

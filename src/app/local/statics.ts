@@ -4,3 +4,5 @@ export const AUTH_ACCOUNT = "/api/account";
 
 export const GET_ARTICLES = "/api/posts";
 export const DELETE_ARTICLE = "/api/posts/id";
+export const CREATE_ARTICLE = "/api/posts";
+export const UPDATE_ARTICLE = "/api/posts";
